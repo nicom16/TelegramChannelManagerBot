@@ -11,5 +11,5 @@ public record User
     public string Name {get; init; }
     
     [JsonPropertyName("last_name")]
-    public string Surname {get; init; }
+    public string? Surname {get; init; }
 }

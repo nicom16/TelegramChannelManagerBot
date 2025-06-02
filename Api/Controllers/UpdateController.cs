@@ -1,21 +1,28 @@
 using Api.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
-[ApiController]
+[Controller]
 public class UpdateController : Controller
 {
-    [HttpPost("update")]
-    public IActionResult Handle(Update update)
+    [HttpPost]
+    public IActionResult Handle(string token, [FromBody] Update update)
     {
-        string path = GetRedirectPath(update);
-        return Redirect(path);
+        try
+        {
+            return RedirectRequest(token, update);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
 
-    private string GetRedirectPath(Update update) => update switch
+    private IActionResult RedirectRequest(string token, Update update) => update switch
     {
-        { Message: { }, Message.Photo: { }  } => "storePhoto",
+        { Message: not null, Message.Photo: not null } => RedirectToAction($"{token}/Posts/StorePhoto", new { update }),
         _ => throw new NotImplementedException()
     };
 }

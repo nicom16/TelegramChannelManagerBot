@@ -15,6 +15,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapControllers();
+app.UseRouting();
+app.MapControllerRoute(
+    name: "default", 
+    pattern: "{token}/{controller}/{action}"
+);
 
 app.Run();

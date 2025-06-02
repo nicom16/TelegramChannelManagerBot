@@ -1,12 +1,13 @@
+using Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
-[ApiController]
+[Controller]
 public class PostsController : Controller
 {
-    [HttpGet("storePhoto")]
-    public IActionResult StorePhoto()
+    [HttpPost]
+    public IActionResult StorePhoto([FromQuery] string token, [FromBody] Update update)
     {
         return Ok("Storing a photo...");
     }
