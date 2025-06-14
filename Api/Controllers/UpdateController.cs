@@ -12,7 +12,9 @@ public class UpdateController : Controller
     {
         try
         {
-            return RedirectRequest(token, update);
+            IActionCommand command = GetCommand(token, update);
+            command.Execute();
+            return Ok();
         }
         catch (Exception ex)
         {
@@ -20,9 +22,31 @@ public class UpdateController : Controller
         }
     }
 
-    private IActionResult RedirectRequest(string token, Update update) => update switch
+    private IActionCommand GetCommand(string token, Update update) => update switch
     {
-        { Message: not null, Message.Photo: not null } => RedirectToAction($"{token}/Posts/StorePhoto", new { update }),
+        { Message.Photo: not null } => new StorePhotoCommand(token, update.Message),
         _ => throw new NotImplementedException()
     };
+}
+
+internal class StorePhotoCommand : IActionCommand
+{
+    private readonly string _token;
+    private readonly Message _message;
+
+    public StorePhotoCommand(string token, Message message)
+    {
+        _message = message;
+        _token = token;
+    }
+
+    public void Execute()
+    {
+        Console.WriteLine("Storing a photo...");
+    }
+}
+
+internal interface IActionCommand
+{
+    void Execute();
 }
