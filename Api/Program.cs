@@ -18,7 +18,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.MapControllerRoute(
     name: "default", 
-    pattern: "{token}/{controller}/{action}"
+    pattern: "{controller}/{action}/{token}"
 );
 
 app.Run();

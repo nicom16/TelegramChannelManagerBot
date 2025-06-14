@@ -12,6 +12,7 @@ public class UpdateController : Controller
     {
         try
         {
+            // TODO: handle token validation here or with middleware?
             IActionCommand command = GetCommand(token, update);
             command.Execute();
             return Ok();
