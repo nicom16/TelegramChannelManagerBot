@@ -1,4 +1,5 @@
 using Api.Models;
+using Application.StorePhotoUseCase;
 
 namespace Api.ActionCommands;
 
@@ -15,6 +16,6 @@ internal class StorePhotoCommand : IActionCommand
 
     public void Execute()
     {
-        Console.WriteLine("Storing a photo...");
+        var useCase = new StorePhotoUseCase();
     }
 }
