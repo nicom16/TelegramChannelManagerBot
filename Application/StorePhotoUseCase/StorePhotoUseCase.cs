@@ -2,4 +2,8 @@
 
 public class StorePhotoUseCase
 {
+    public StorePhotoUseCase()
+    {
+        
+    }
 }

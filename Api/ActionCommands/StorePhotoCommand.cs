@@ -16,6 +16,6 @@ internal class StorePhotoCommand : IActionCommand
 
     public void Execute()
     {
-        var useCase = new StorePhotoUseCase();
+        StorePhotoUseCase useCase = new();
     }
 }
