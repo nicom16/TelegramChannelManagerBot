@@ -1,3 +1,5 @@
+using Application.Queries.Base;
+
 namespace Application.Queries;
 
 public interface IQueryHandlerFactory

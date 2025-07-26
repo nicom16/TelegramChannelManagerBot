@@ -1,17 +1,19 @@
 using Shared.Telegram;
 
-namespace Application.Update;
+namespace Application.UpdateAnalyzer;
 
 public static class UpdateAnalyzer
 {
-    public static bool IsCommand(this Message message)
+    public static bool IsCommand(this Update update)
     {
-        return message.IsNewPhotoToStore() ||
-               message.IsNewVideoToStore() ||
-               message.IsNewAnimationToStore();
+        if (update.Message is null) return false;
+        
+        return update.Message.IsNewPhotoToStore() ||
+               update.Message.IsNewVideoToStore() ||
+               update.Message.IsNewAnimationToStore();
     }
 
-    public static bool IsQuery(this Message message)
+    public static bool IsQuery(this Update update)
     {
         // TODO
         return false;

@@ -1,4 +1,4 @@
-namespace Application.Queries;
+namespace Application.Queries.Base;
 
 public abstract class QueryBase : IQuery
 {

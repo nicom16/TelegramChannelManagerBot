@@ -1,6 +1,9 @@
 using Application.Commands;
+using Application.Commands.Base;
+using Application.Commands.Factory;
 using Application.Queries;
-using Application.Update;
+using Application.Queries.Factory;
+using Application.UpdateAnalyzer;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Telegram;
 
@@ -34,13 +37,13 @@ public class UpdateController : Controller
             // TODO: token validation
             // TODO: update validation?
             
-            if (update.Message.IsCommand())
+            if (update.IsCommand())
             {
-                ICommand command = _commandFactory.Create(update.Message);
+                ICommand command = _commandFactory.Create(update);
                 ICommandHandler commandHandler = _commandHandlerFactory.GetHandler(command);
                 commandHandler.Handle(command);
             }
-            else if (update.Message.IsQuery())
+            else if (update.IsQuery())
             {
                 // TODO
             }
