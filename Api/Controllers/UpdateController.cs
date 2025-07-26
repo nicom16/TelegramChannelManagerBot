@@ -36,7 +36,9 @@ public class UpdateController : Controller
             
             if (update.Message.IsCommand())
             {
-                // TODO
+                ICommand command = _commandFactory.Create(update.Message);
+                ICommandHandler commandHandler = _commandHandlerFactory.GetHandler(command);
+                commandHandler.Handle(command);
             }
             else if (update.Message.IsQuery())
             {
