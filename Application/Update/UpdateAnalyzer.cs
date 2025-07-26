@@ -1,8 +1,8 @@
-using Api.Models;
+using Shared.Telegram;
 
-namespace Api.Helpers;
+namespace Application.Update;
 
-public static class MessageHelpers
+public static class UpdateAnalyzer
 {
     public static bool IsCommand(this Message message)
     {

@@ -1,7 +1,6 @@
 using System.Text.Json.Serialization;
-using Api.Controllers;
 
-namespace Api.Models;
+namespace Shared.Telegram;
 
 public record Update
 {
