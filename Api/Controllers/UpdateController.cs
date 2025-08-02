@@ -1,3 +1,5 @@
+using Application.Commands.Common;
+using Application.Commands.PhotoToStore;
 using Application.UpdateAnalyzer;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Telegram;
@@ -22,7 +24,13 @@ public class UpdateController : Controller
             
             if (update.IsCommand())
             {
-                // TODO
+                if (update.Message.IsNewPhotoToStore())
+                {
+                    var command = new PhotoToStoreCommand<CommandResult>(update.Message.Photo.Id);
+                    var handler = new PhotoToStoreCommandHandler();
+                    var result = handler.Handle(command);
+                    return Ok(result);
+                }
             }
             else if (update.IsQuery())
             {
