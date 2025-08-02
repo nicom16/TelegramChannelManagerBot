@@ -1,8 +1,8 @@
-using Application.Commands.Base;
+using Application.Commands.Common;
 
 namespace Application.Commands;
 
-public record PhotoToStoreCommand(int PhotoId) : CommandBase
+public record PhotoToStoreCommand(int PhotoId) : CommandBase<CommandResult>
 {
     int PhotoId { get; init; } = PhotoId;
 }
