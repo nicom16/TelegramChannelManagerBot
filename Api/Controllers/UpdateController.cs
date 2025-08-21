@@ -28,7 +28,7 @@ public class UpdateController : Controller
                 {
                     var command = new PhotoToStoreCommand<CommandResult>(update.Message.Photo.Id);
                     var handler = new PhotoToStoreCommandHandler();
-                    var result = handler.Handle(command);
+                    var result = handler.HandleAsync(command);
                     return Ok(result);
                 }
             }

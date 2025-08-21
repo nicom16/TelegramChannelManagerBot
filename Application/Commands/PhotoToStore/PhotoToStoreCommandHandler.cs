@@ -5,7 +5,7 @@ namespace Application.Commands.PhotoToStore;
 public class PhotoToStoreCommandHandler 
     : ICommandHandler<PhotoToStoreCommand<CommandResult>, CommandResult>
 {
-    public Task<CommandResult> Handle(PhotoToStoreCommand<CommandResult> command)
+    public Task<CommandResult> HandleAsync(PhotoToStoreCommand<CommandResult> command)
     {
         var commandResult = 
             new CommandResult($"Photo {command.PhotoId} was added to store.");
