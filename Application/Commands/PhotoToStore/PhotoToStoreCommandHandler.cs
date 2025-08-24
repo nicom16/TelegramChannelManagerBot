@@ -1,13 +1,13 @@
 using Application.Commands.Common;
+using Application.ResultPatternImplementation;
 
 namespace Application.Commands.PhotoToStore;
 
 public class PhotoToStoreCommandHandler 
-    : ICommandHandler<PhotoToStoreCommand<CommandResult>, CommandResult>
+    : ICommandHandler<PhotoToStoreCommand<OperationResult>, OperationResult>
 {
-    public async Task<CommandResult> HandleAsync(PhotoToStoreCommand<CommandResult> command)
+    public async Task<OperationResult> HandleAsync(PhotoToStoreCommand<OperationResult> command)
     {
-        return await Task.Run(() => 
-            new CommandResult($"Photo {command.PhotoId} was added to store."));
+        return await Task.Run(() => OperationResult.Success());
     }
 }

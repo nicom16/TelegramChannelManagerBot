@@ -1,5 +1,7 @@
 using Api.Telegram;
 using Api.UpdateDispatcher;
+using Application.Commands.Common;
+using Application.ResultPatternImplementation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -22,7 +24,10 @@ public class UpdateController : Controller
             // TODO: token validation
             // TODO: update validation?
             
-            return await _updateDispatcher.DispatchAsync(update);
+            OperationResult operationResult = await _updateDispatcher.DispatchAsync(update);    
+            if (!operationResult.IsSuccess)
+                return BadRequest(operationResult.Message);
+            return Ok();
         }
         catch (Exception ex)
         {
