@@ -1,4 +1,4 @@
-namespace Shared.Telegram;
+namespace Api.Telegram;
 
 public record Animation
 {

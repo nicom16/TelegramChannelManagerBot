@@ -1,5 +1,5 @@
+using Api.Telegram;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Telegram;
 
 namespace Api.UpdateDispatcher;
 
@@ -12,7 +12,7 @@ public class UpdateDispatcher : IUpdateDispatcher
         _serviceProvider = serviceProvider;
     }
 
-    public IActionResult Dispatch(Update update)
+    public async Task<IActionResult> DispatchAsync(Update update)
     {
         throw new NotImplementedException();
     }

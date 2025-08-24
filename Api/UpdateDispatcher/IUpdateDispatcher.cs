@@ -1,9 +1,9 @@
+using Api.Telegram;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Telegram;
 
 namespace Api.UpdateDispatcher;
 
 public interface IUpdateDispatcher
 {
-    IActionResult Dispatch(Update update);
+    Task<IActionResult> DispatchAsync(Update update);
 }

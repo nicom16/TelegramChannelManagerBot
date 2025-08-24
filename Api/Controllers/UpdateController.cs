@@ -1,43 +1,28 @@
-using Application.Commands.Common;
-using Application.Commands.PhotoToStore;
-using Application.UpdateAnalyzer;
+using Api.Telegram;
+using Api.UpdateDispatcher;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Telegram;
 
 namespace Api.Controllers;
 
 [Controller]
 public class UpdateController : Controller
 {
-    public UpdateController()
+    private readonly IUpdateDispatcher _updateDispatcher;
+    
+    public UpdateController(IUpdateDispatcher updateDispatcher)
     {
-        // TODO
+        _updateDispatcher = updateDispatcher;
     }
     
     [HttpPost]
-    public IActionResult Handle(string token, [FromBody] Update update)
+    public async Task<IActionResult> Handle(string token, [FromBody] Update update)
     {
         try
         {
             // TODO: token validation
             // TODO: update validation?
             
-            if (update.IsCommand())
-            {
-                if (update.Message.IsNewPhotoToStore())
-                {
-                    var command = new PhotoToStoreCommand<CommandResult>(update.Message.PhotoSizes.First().Id);
-                    var handler = new PhotoToStoreCommandHandler();
-                    var result = handler.HandleAsync(command);
-                    return Ok(result);
-                }
-            }
-            else if (update.IsQuery())
-            {
-                // TODO
-            }
-            
-            return Ok();
+            return await _updateDispatcher.DispatchAsync(update);
         }
         catch (Exception ex)
         {
