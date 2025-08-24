@@ -26,7 +26,7 @@ public class UpdateController : Controller
             {
                 if (update.Message.IsNewPhotoToStore())
                 {
-                    var command = new PhotoToStoreCommand<CommandResult>(update.Message.Photo.Id);
+                    var command = new PhotoToStoreCommand<CommandResult>(update.Message.PhotoSizes.First().Id);
                     var handler = new PhotoToStoreCommandHandler();
                     var result = handler.HandleAsync(command);
                     return Ok(result);

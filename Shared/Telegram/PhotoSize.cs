@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Shared.Telegram;
 
-public record Photo
+public record PhotoSize
 {
     [JsonPropertyName("id")]
     public int Id { get; init; }

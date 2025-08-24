@@ -21,7 +21,7 @@ public static class UpdateAnalyzer
     
     public static bool IsNewPhotoToStore(this Message message)
     {
-        return message.Photo is not null;
+        return message.PhotoSizes is not null;
     }
 
     public static bool IsNewVideoToStore(this Message message)

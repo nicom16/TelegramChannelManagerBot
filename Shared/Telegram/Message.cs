@@ -14,7 +14,7 @@ public record Message
     public Animation? Animation { get; init; }
     
     [JsonPropertyName("photo")]
-    public Photo? Photo { get; init; }
+    public IEnumerable<PhotoSize>? PhotoSizes { get; init; }
     
     [JsonPropertyName("video")]
     public Video? Video { get; init; }
